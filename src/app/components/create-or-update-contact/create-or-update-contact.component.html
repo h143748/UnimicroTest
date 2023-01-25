@@ -1,0 +1,53 @@
+<div class="modal-header">
+  <h4 class="modal-title" *ngIf="currentContact?.Info?.Name">Edit contact</h4>
+  <h4 class="modal-title" *ngIf="!currentContact?.Info?.Name">Create Contact</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+
+  <form #userInfo="ngForm" class="p-4" (ngSubmit)="submit(userInfo.value)">
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label for="edit_name">Name</label>
+      <input type="text" class="form-control" id="edit_name" name="Name" [ngModel]="currentContact?.Info?.Name" placeholder="Name">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="edit_role">Role</label>
+      <input type="text" class="form-control" id="edit_role" name="Role" [ngModel]="currentContact?.Role" placeholder="Role">
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label for="edit_email ">Email address</label>
+      <input type="email" class="form-control" id="edit_email" name="EmailAddress" [ngModel]="currentContact?.Info?.DefaultEmail?.EmailAddress" placeholder="Email Address">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="edit_phone">Phone</label>
+      <input type="tel" class="form-control" id="edit_phone" name="Number" [ngModel]="currentContact?.Info?.DefaultPhone?.Number" placeholder="Phone">
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label for="edit_addressLine1">Street Address</label>
+      <input type="text" class="form-control" id="edit_addressLine1" name="AddressLine1" [ngModel]="currentContact?.Info?.InvoiceAddress?.AddressLine1" placeholder="Street Address">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="edit_zipCode">Postal Code</label>
+      <input type="text" class="form-control" id="edit_zipCode" name="PostalCode"  [ngModel]="currentContact?.Info?.InvoiceAddress?.PostalCode" placeholder="Zip Code">
+    </div>
+  </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="edit_country">Country</label>
+        <input type="text" class="form-control" id="edit_country" name="Country" [ngModel]="currentContact?.Info?.InvoiceAddress?.Country" placeholder="Country">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="edit_city">City</label>
+        <input type="text" class="form-control" id="edit_city" name="City" [ngModel]="currentContact?.Info?.InvoiceAddress?.City" placeholder="City">
+      </div>
+    </div>
+    <div class="">
+      <button type="submit" class="btn btn-primary" (click)="activeModal.dismiss('Close click')">Submit</button>
+      <button type="button" class="btn btn-danger" *ngIf="currentContact?.Info?.Name" (click)="deleteContact()" (click)="activeModal.dismiss('Close click')">Delete Contact</button>
+    </div>
+  </form>

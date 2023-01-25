@@ -1,0 +1,39 @@
+  <div class="container">
+    <form>
+      <div class="mb-3 mt-3 row">
+        <div class="col-md-4 float-start">
+          <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter" placeholder="Search"/>
+        </div>
+        <div buttons class="col xs-2">
+          <div class=" col-sm-auto float-end">
+            <button class="btn btn btn-primary custom-button" (click)="createContact()">Add New Contact</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <table class="table" id="main-table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Role</th>
+          <th scope="col">Email Address</th>
+          <th scope="col">Phone #</th>
+          <th scope="col">City</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <tr *ngFor="let contact of contacts | async; index as i" (click)="editContact(contact)">
+          <td>
+            <ngb-highlight [result]="contact.ID | number" [term]="filter.value"></ngb-highlight>
+          </td>
+          <td><ngb-highlight [result]="contact.Info?.Name " [term]="filter.value"></ngb-highlight></td>
+          <td><ngb-highlight [result]="contact.Role" [term]="filter.value"></ngb-highlight></td>
+          <td><ngb-highlight [result]="contact.Info?.DefaultEmail?.EmailAddress" [term]="filter.value"></ngb-highlight></td>
+          <td><ngb-highlight [result]="contact.Info?.DefaultPhone?.Number" [term]="filter.value"></ngb-highlight></td>
+          <td><ngb-highlight [result]="contact.Info?.InvoiceAddress?.City" [term]="filter.value"></ngb-highlight></td>
+        </tr>
+      </tbody>  
+    </table>
+</div>
